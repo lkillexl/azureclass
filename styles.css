@@ -6,7 +6,10 @@ html, body {
   margin: 0;
   border: 0;
   padding: 0;
-  background-color: #fff;
+  background-image: url('https://image.freepik.com/foto-gratis/suave-nublado-es-degradado-colores-pastel-fondo-abstracto-cielo-color-dulce_6529-627.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 main {
@@ -18,4 +21,99 @@ main {
 main > h1 {
   text-align: center;
   font-size: 3.5em;
+}
+
+input[type=number], select { 
+  padding: 12px 12px;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-family: MV Boli;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 0 auto;
+  display: block;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: MV Boli;
+}
+
+input[type=button] {
+  background-color: #45a049;
+  margin: 0 auto;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-family: MV Boli;
+}
+
+.div-left {
+  float: left;
+  background-image: url('https://image.freepik.com/foto-gratis/suave-nublado-es-degradado-pastel-fondo-cielo-abstracto-color-dulce_6529-1550.jpg');
+  width: 25%;
+  margin-top: 5%;
+  margin-left: 10%;
+  border-radius: 50%;
+}
+
+.div-right2 {
+  float: right;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  width:  30%;
+  margin-top: 5%;
+  margin-right: 10%;
+} 
+
+.div-right {
+  float: right;
+  border-radius: 5px;
+  width: 30%;
+  height: auto;
+  margin-top: 5%;
+  margin-right: 10%;
+} 
+
+P { 
+  text-align: center; 
+  color: #25a148;
+  font-family: MV Boli;
+}
+
+.textocuadro{
+  text-align: center; 
+  color: black;
+}
+.puntero{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
+.cuadro{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-image: linear-gradient(to right, #25a148, yellow);; /*COLOR EN GRADIENTE*/
+}
+
+.tituloPrincipal{
+  text-align: center; 
+  font-size: 72px;
+  background: -webkit-linear-gradient(rgb(245, 194, 152), rgb(253, 111, 29));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family:Lucida Handwriting;
 }

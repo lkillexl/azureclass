@@ -1,17 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+  var numElems = 0;
+  var pila = Array();
+  var max = 520; 
+  var crea = true;
+
+  function inserta(numero){
+    var numft = 'No es un numero';
+    try{
+      numft = parseInt(numero.value);
+    }catch(e){
+      numft = 'No es un numero';
+    }
+    if(!isNaN(numft)){  
+      if(numElems < 10){ 
+          document.getElementById("btn1").disabled = true; 
+          document.getElementById("btn2").disabled = true; 
+
+          pila[numElems] = numero.value; 
+          numElems++; 
+
+          document.getElementById("numElems").value = numElems;
+          
+          var divA = document.getElementById("animacion"); 
+
+          if(crea){
+              var punteroInicio = document.createElement("div"); 
+              var punteroFin = document.createElement("div");
+              punteroInicio.setAttribute("id","pInicio"); 
+              punteroFin.setAttribute("id","pFinal");
+              punteroInicio.setAttribute("class","puntero"); 
+              punteroFin.setAttribute("class","puntero");
+              var textop1 = document.createElement("p");
+              textop1.setAttribute("class", "textocuadro");
+              var tex1 = document.createTextNode("INICIO"); 
+              textop1.append(tex1);
+              var textop2 = document.createElement("p");
+              textop2.setAttribute("class", "textocuadro");
+              var tex2 = document.createTextNode("FINAL");
+              textop2.append(tex2);
+              punteroInicio.append(textop1);
+              punteroFin.append(textop2); 
+              divA.append(punteroInicio);
+              divA.append(punteroFin);
+              crea = false;
+          }
+
+          var cuadro = document.createElement("div");
+          cuadro.setAttribute( "id", "divC"+(numElems-1) );
+          cuadro.setAttribute("class", "cuadro");
+          var textoC = document.createElement("p");
+          textoC.setAttribute("class", "textocuadro");
+          var tex = document.createTextNode(numero.value);
+          textoC.append(tex);
+          cuadro.append(textoC);
+          divA.append(cuadro);
+
+          var elem = document.getElementById("divC"+(numElems-1)); 
+
+          var punteroi = document.getElementById("pInicio"); 
+          var punterof = document.getElementById("pFinal");
+          var posL = document.getElementById("divC"+(numElems-1)).offsetLeft; 
+          punteroi.style.left = posL - 55 + 'px'; 
+          punterof.style.left = posL + 55 + 'px';
+          
+          var posf = document.getElementById("divC"+(numElems-1)).offsetTop; 
+          cont = 0; 
+          var id = setInterval(frame, 1);
+          function frame() { 
+              if (cont == max) { 
+                  clearInterval(id); 
+                  document.getElementById("btn1").disabled = false;
+                  document.getElementById("btn2").disabled = false;
+              } else {
+                  cont++;
+                  posf++;
+                  elem.style.top =  posf + "px"; 
+                  punteroi.style.top = posf + "px";
+                  if(numElems == 1){ 
+                      punterof.style.top = posf + "px";
+                  }
+              }
+          }
+          max = max - 50; 
+
+          var text = "</tr>";
+          for(var x = 0; x < numElems; x++){
+              text += "Elemento: " + (x+1) + " valor: " + pila[x] + "</br>";
+          }
+
+          document.getElementById("resultado").innerHTML = text;
+      }
+    }
+  }
+
+  function retira(){
+      document.getElementById("btn1").disabled = true;
+      document.getElementById("btn2").disabled = true;
+      if(numElems > 0){
+          var elem = document.getElementById("divC"+(numElems-1));   
+          var posf = document.getElementById("divC"+(numElems-1)).offsetLeft;
+          var punteroi = document.getElementById("pInicio");
+          var punterof = document.getElementById("pFinal");
+          var posp1 = document.getElementById("pInicio").offsetLeft;
+          var posp2 = document.getElementById("pFinal").offsetLeft;
+          cont = 0;
+          var id = setInterval(frame, 1);
+          function frame() {
+              if (cont == 500) { 
+                  clearInterval(id);
+
+                  document.getElementById("btn1").disabled = false;
+                  document.getElementById("btn2").disabled = false;
+                  document.getElementById("divC"+(numElems-1)).remove();
+                  pila[numElems - 1] = null; 
+                  numElems--; 
+                  document.getElementById("numElems").value = numElems;
+                  
+                  if(numElems > 0){ 
+                      var nuevaP = document.getElementById("divC"+(numElems-1)).offsetLeft
+                      var nuevaP2 = document.getElementById("divC"+(numElems-1)).offsetTop;
+                      punteroi.style.left = nuevaP - 55 + "px";
+                      punteroi.style.top = nuevaP2 + "px";
+                  }else{ 
+                      punteroi.remove();
+                      punterof.remove();
+                      crea = true; 
+                  }
+                  
+                  var text = "</tr>";
+                  for(var x = 0; x < numElems; x++){
+                      text += "Elemento: " + (x+1) + " valor: " + pila[x] + "</br>";
+                  }
+                  document.getElementById("resultado").innerHTML = text;
+
+              } else { 
+                  cont++;
+                  posf++;
+                  posp1++;
+                  elem.style.left =  posf + "px";
+                  punteroi.style.left = posp1 + "px";
+                  if(numElems == 1){
+                      posp2++;
+                      punterof.style.left = posp2 + "px";
+                  }
+              }
+          }
+          max = max + 50;
+      }
+  }
+</script>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+  <title>Pila de números</title>
 </head>
 
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
+  <div>
+    <p class="tituloPrincipal">Pila en la informática</p></br>
+    <p>Una Pila es una colección ordenada de
+      elementos en la que se pueden insertar y
+      eliminar por un extremo llamado tope.
+      Por tal razón se conoce como una estructura
+      de datos LIFO (last-in, first-out).</p></br>
+    <p>Push: Inserta un elemento en la pila.</p></br>
+    <p>Pop: Saca un elemento en la pila.</p></br>
+    <p>A continuación te presento un mini simulador de como funciona una pila para lectura y escritura de números, si te encuentras programando una pila solo podrás leer el inicio de la pila para acceder a sus datos.</p></br>
+  </div>
+  <div class="div-left">
+      <p>Inserta un número</p></br>
+      <input type="number" name="inserta" id="inserta" value="1"/></br>
+      <input type="button" name="btn1" id="btn1" onclick="inserta(document.getElementById('inserta'))" value="push"/></br>
+      <p>Retira un número de la pila</p></br>
+      <input type="button" name="btn2" id="btn2" onclick="retira()" value="pop"/></br>
+      <p>Número de elementos en la pila</p>
+      <input type="number" name="numElems" id="numElems" value="0" readonly/>
+      <p>Elementos en la pila</p>
+      <p id="resultado"></p>
+  </div>
+  <div class="div-right" id = "animacion">
+        
+  </div>
+  <div class="div-right2" id = "codigoC">
+        
+  </div>
 </body>
-
 </html>
